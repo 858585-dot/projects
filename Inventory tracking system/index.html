@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <link rel="icon" href="https://t3.ftcdn.net/jpg/05/42/85/04/360_F_542850412_mbdrJttsmcColprJNmMeWgUoNsJLdFJn.jpg" type="image/x-icon" />
+   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="greeting"></div>
+
+
+    <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+            <label>Student Name:
+                <input type="text" id="name" placeholder="Enter student name">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Roll No.:
+                <input type="text" id="rollNo" placeholder="Enter roll number">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Subject:
+                <input type="text" id="subject" placeholder="Enter subject">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Fee:
+                <input type="number" id="number" placeholder="Enter fee">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="checkbox"> Paid</label>
+        </div>
+        <div class="form-group">
+            <button type="submit">Enter</button>
+        </div>
+    </form>
+
+    <br>
+    <div class="table-container">
+        <table border="1" id="outputTable">
+            <tr>
+                <th>Student Name</th>
+                <th>Roll No</th>
+                <th>Subject</th>
+                <th>Number</th>
+            </tr>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
