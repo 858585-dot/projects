@@ -1,0 +1,155 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  perspective: 1000px;
+}
+
+/* Container */
+.todo-container {
+  background: white;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transform: rotateY(0deg);
+  transition: transform 0.6s ease;
+}
+
+.todo-container:hover {
+  transform: rotateY(10deg);
+}
+
+/* Title */
+h1 {
+  margin: 0 0 20px;
+  color: #333;
+}
+
+/* Input Section */
+.input-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#task-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#add-task {
+  margin-left: 10px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#add-task:hover {
+  background-color: #218838;
+}
+
+/* Task List */
+#task-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+#task-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+#task-list li.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+#task-list li button {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+#task-list li button:hover {
+  background: #c82333;
+}
+
+.done-task {
+  background: #17a2b8;
+}
+
+.done-task:hover {
+  background: #117a8b;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filters .filter {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.filters .filter:hover {
+  background: #0056b3;
+}
+
+/* Clear All */
+#clear-all {
+  padding: 10px 20px;
+  background: #ffc107;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#clear-all:hover {
+  background: #e0a800;
+}
