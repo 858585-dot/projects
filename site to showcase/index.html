@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crop and Zoom Image</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 0, 0, 0.3),
+        rgba(0, 255, 0, 0.3),
+        rgba(0, 0, 255, 0.3)
+      );
+      font-family: sans-serif;
+    }
+
+    .image-container {
+      width: 300px;
+      height: 200px;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 4px solid #444;
+      cursor: pointer;
+      display: inline-block;
+      margin: 10px;
+      position: relative;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      transition: 0.3s ease-in-out;
+      display: none;
+    }
+
+    .image-container img.active {
+      display: block;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 20px;
+      gap: 10px;
+    }
+
+    .nav-buttons button,
+    .nav-buttons a {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #444;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .nav-buttons button:disabled {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Image Containers -->
+<div class="image-container"
+     data-images='["project-images/red1.png", "project-images/red2.png", "project-images/red3.png"]'
+     data-source="text-editor/index.html">
+  <img src="project-images/red1.png" class="active" alt="Red Image 1">
+  <img src="project-images/red2.png" alt="Red Image 2">
+  <img src="project-images/red3.png" alt="Red Image 3">
+</div>
+
+<div class="image-container"
+     data-images='["project-images/1.png"]'
+     data-source="https://example.com/shoes-project-source">
+  <img src="project-images/1.png" class="active" alt="Shoes Image">
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img id="modalImg" src="">
+  <div class="nav-buttons">
+    <button id="prevBtn">⟨ Prev</button>
+    <a href="#" target="_blank" id="sourceBtn">Source Code</a>
+    <button id="nextBtn">Next ⟩</button>
+  </div>
+</div>
+
+<!-- Script -->
+<script>
+  const modal = document.getElementById("myModal");
+  const modalImg = document.getElementById("modalImg");
+  const closeBtn = document.querySelector(".close");
+  const nextBtn = document.getElementById("nextBtn");
+  const prevBtn = document.getElementById("prevBtn");
+  const sourceBtn = document.getElementById("sourceBtn");
+
+  let currentImages = [];
+  let currentIndex = 0;
+  let currentSourceLink = "";
+
+  document.querySelectorAll(".image-container").forEach(container => {
+    container.addEventListener("click", function () {
+      currentImages = JSON.parse(this.dataset.images);
+      currentIndex = 0;
+      currentSourceLink = this.dataset.source;
+      showImage();
+      modal.style.display = "flex";
+
+      if (currentImages.length <= 1) {
+        nextBtn.style.display = "none";
+        prevBtn.style.display = "none";
+      } else {
+        nextBtn.style.display = "inline-block";
+        prevBtn.style.display = "inline-block";
+      }
+
+      if (currentSourceLink) {
+        sourceBtn.href = currentSourceLink;
+        sourceBtn.style.display = "inline-block";
+      } else {
+        sourceBtn.style.display = "none";
+      }
+    });
+  });
+
+  function showImage() {
+    modalImg.src = currentImages[currentIndex];
+  }
+
+  nextBtn.onclick = function () {
+    if (currentIndex < currentImages.length - 1) {
+      currentIndex++;
+      showImage();
+    }
+  }
+
+  prevBtn.onclick = function () {
+    if (currentIndex > 0) {
+      currentIndex--;
+      showImage();
+    }
+  }
+
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function (e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>
